@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- <com.cql.customerview.SkyView 
+        android:id="@+id/skyview"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:text="@string/text"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:marqueeRepeatLimit="marquee_forever" /> -->
+<!--         android:singleLine="true" -->
+
+	<com.cql.customerview.CircleView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+	
+</LinearLayout>
