@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 public class SkyView extends TextView {
@@ -21,6 +22,9 @@ public class SkyView extends TextView {
     private LinearGradient mLinearGradient;
     private Matrix mGradientMatrix;
     private int translate;
+    
+    private int lastX;
+    private int lastY;
 
     public SkyView(Context context) {
         super(context);
@@ -74,6 +78,46 @@ public class SkyView extends TextView {
                 mGradientMatrix = new Matrix();
             }
         }
+    }
+    
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+    }
+    
+    @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                lastX = x;
+                lastY = y;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int offsetX = x - lastX;
+                int offsetY = y - lastY;
+//                layout(getLeft() + offsetX, getTop() + offsetY, 
+//                        getRight() + offsetX, getBottom() + offsetY);
+                offsetLeftAndRight(offsetX);
+                offsetTopAndBottom(offsetY);
+                break;
+            case MotionEvent.ACTION_UP:
+                /**
+                 * performClick()方法是 onClick() 方法的入口，如果在 onTouchEvent() 方法中不调用的话，
+                 * 若 onTouchEvent() 消费了事件，则view 的 onclick() 方法就不会得到执行
+                 */
+                performClick();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
     
     @Override
